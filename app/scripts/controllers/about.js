@@ -9,16 +9,16 @@
  */
 angular.module('dockuiApp')
   .controller('AboutCtrl', function ($scope, $log, ImageListService) {
-    $scope.images = {};
+    $scope.images = [];
 
-    $log.debug("Getting images...");
+    $log.debug('Getting images...');
     $scope.images = ImageListService.getImageList()
     .success(function(images){
-      $log.debug("Got images", images);
+      $log.debug('Got images', images);
       $scope.images = images;
     })
     .error(function(error) {
-        $log.error("GetImages failed", error);
+        $log.error('GetImages failed', error);
       $scope.status = 'Unable to get image list: ' + error.message;
     });
 

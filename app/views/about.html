@@ -1,4 +1,21 @@
 <h4>Images</h4>
 <div ng-controller="AboutCtrl">
-  {{images}}
+  <table st-table="rowCollection" class="table table-striped">
+  	<thead>
+    	<tr>
+        <th>Tags</th>
+    		<th>Created</th>
+    		<th>Id</th>
+    		<th>Size</th>
+    	</tr>
+  	</thead>
+  	<tbody>
+    	<tr ng-repeat="row in images">
+        <td>{{row.RepoTags}}</td>
+    		<td>{{row.Created * 1000 |  date:'yyyy-MM-dd HH:mm' }}  </td>
+    		<td>{{row.Id}}</td>
+    		<td>{{row.Size}}</td>
+    	</tr>
+  	</tbody>
+</table>
 </div>
