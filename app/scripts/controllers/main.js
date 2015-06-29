@@ -8,8 +8,12 @@
  * Controller of the dockuiApp
  */
 angular.module('dockuiApp')
-  .controller('MainCtrl', function ($scope, $log, ImageListService) {
+  .controller('MainCtrl', function ($scope, $log, $interval, ImageListService) {
+
     $scope.images = [];
+    $scope.isTeamCityBusy = true;
+    $scope.isTeradataBusy = false;
+    $scope.isCustomerBusy = true;
 
     $log.debug('Getting images...');
     $scope.images = ImageListService.getImageList()
@@ -22,4 +26,29 @@ angular.module('dockuiApp')
       $scope.status = 'Unable to get image list: ' + error.message;
     });
 
+    var stop;
+    var tick = function() {
+      if (angular.isDefined(stop) ) {
+        return;
+      }
+
+      stop = $interval(function() {
+        $scope.isTeamCityBusy = !$scope.isTeamCityBusy;
+        $scope.isTeradataBusy = !$scope.isTeradataBusy;
+        $scope.isCustomerBusy = !$scope.isCustomerBusy;
+      }, 5000);
+    };
+
+    $scope.stopTick = function() {
+      if (angular.isDefined(stop)) {
+        $interval.cancel(stop);
+        stop = undefined;
+      }
+    };
+
+    $scope.$on('$destroy', function() {
+      $scope.stopTick();
+    });
+
+    tick();
   });

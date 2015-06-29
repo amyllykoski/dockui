@@ -23,11 +23,11 @@
     <div class="container">
       <h1>SW Update POC</h1>
       <div class="column">
-        <img src="images/TC_135x48.png" alt="TeamCity" height="48" width="135">
-        <span ng-if="false">
-          <img src="images/ajax-loader.gif" alt="Loading" height="42" width="42">
-        </span>
-        <div ng-controller="MainCtrl">
+        <div ng-controller="MainCtrl" ng-model="isTeamCityBusy">
+          <img src="images/TC_135x48.png" alt="TeamCity" height="48" width="135">
+          <span ng-if="isTeamCityBusy">
+            <img src="images/ajax-loader.gif" alt="Loading" height="42" width="42">
+          </span>
             <table st-table="rowCollection" class="table table-striped">
               <thead>
                 <tr>
@@ -46,11 +46,11 @@
       </div>
 
       <div class="column">
-        <img src="images/Teradata-Icon.jpg" alt="Teradata" height="48" width="135">
-        <span ng-if="false">
-          <img src="images/ajax-loader.gif" alt="Loading" height="42" width="42">
-        </span>
-       <div ng-controller="MainCtrl">
+       <div ng-controller="MainCtrl" ng-model="isTeradataBusy">
+         <img src="images/Teradata-Icon.jpg" alt="Teradata" height="48" width="135">
+         <span ng-if="isTeradataBusy">
+           <img src="images/ajax-loader.gif" alt="Loading" height="42" width="42">
+         </span>
          <table st-table="rowCollection" class="table table-striped">
          	<thead>
            	<tr>
@@ -69,11 +69,11 @@
      </div>
 
      <div class="column">
-        <img src="images/customer.jpg" alt="Customer" height="48" width="135">
-        <span ng-if="false">
-          <img src="images/ajax-loader.gif" alt="Loading" height="32" width="32">
-        </span>
-       <div ng-controller="MainCtrl">
+       <div ng-controller="MainCtrl" ng-model="isCustomerBusy">
+         <img src="images/customer.jpg" alt="Customer" height="48" width="135">
+         <span ng-if="isCustomerBusy">
+           <img src="images/ajax-loader.gif" alt="Loading" height="42" width="42">
+         </span>
          <table st-table="rowCollection" class="table table-striped">
            <thead>
              <tr>
