@@ -33,6 +33,7 @@ angular.module('dockuiApp')
       }
 
       stop = $interval(function() {
+        // TODO: Add proxy query
         $scope.isTeamCityBusy = !$scope.isTeamCityBusy;
         $scope.isTeradataBusy = !$scope.isTeradataBusy;
         $scope.isCustomerBusy = !$scope.isCustomerBusy;
