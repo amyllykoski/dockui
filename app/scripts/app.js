@@ -25,16 +25,12 @@ angular
     $httpProvider.defaults.headers.common.Accept = 'application/json';
     $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
 
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+    // $routeProvider
+    //   .when('/', {
+    //     templateUrl: 'views/main.html',
+    //     controller: 'MainCtrl'
+    //   })
+    //   .otherwise({
+    //     redirectTo: '/'
+    //   });
   });

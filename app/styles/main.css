@@ -7,7 +7,23 @@
 
 body {
   padding: 0;
+  background-color: lightblue;
 }
+
+/* Table and column styling for the main view.*/
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd)	{
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.column { text-align: center; float: left; margin: 30px; width: 33%; }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,

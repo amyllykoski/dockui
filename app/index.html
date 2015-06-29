@@ -1,18 +1,5 @@
 <!doctype html>
 <html class="no-js">
-  <style>
-    table, th , td  {
-      border: 1px solid grey;
-      border-collapse: collapse;
-      padding: 5px;
-    }
-    table tr:nth-child(odd)	{
-      background-color: #f1f1f1;
-    }
-    table tr:nth-child(even) {
-      background-color: #ffffff;
-    }
-  </style>
   <head>
     <meta charset="utf-8">
     <title></title>
@@ -33,29 +20,63 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">TeamCity</a></li>
-              <li><a ng-href="#/about">Teradata Image Registry</a></li>
-              <li><a ng-href="#/">Customer Image Registry</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="container">
-    <div ng-view=""></div>
-    </div>
-</table>
-
-
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> SW Update POC </p>
+      <div class="column"><h2>TeamCity</h2>
+        <div ng-controller="MainCtrl">
+            <table st-table="rowCollection" class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Tags</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="row in images">
+                  <td>{{row.RepoTags}}</td>
+                  <td>{{row.Created * 1000 |  date:'yyyy-MM-dd HH:mm' }}  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
       </div>
+
+      <div class="column"><h2>Teradata SW Registry</h2>
+       <div ng-controller="MainCtrl">
+         <table st-table="rowCollection" class="table table-striped">
+         	<thead>
+           	<tr>
+               <th>Tags</th>
+           		<th>Created</th>
+           	</tr>
+         	</thead>
+         	<tbody>
+           	<tr ng-repeat="row in images">
+               <td>{{row.RepoTags}}</td>
+           		<td>{{row.Created * 1000 |  date:'yyyy-MM-dd HH:mm' }}  </td>
+           	</tr>
+         	</tbody>
+         </table>
+       </div>
+     </div>
+
+     <div class="column"><h2>Customer SW Registry</h2>
+       <div ng-controller="MainCtrl">
+         <table st-table="rowCollection" class="table table-striped">
+           <thead>
+             <tr>
+               <th>Tags</th>
+               <th>Created</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr ng-repeat="row in images">
+               <td>{{row.RepoTags}}</td>
+               <td>{{row.Created * 1000 |  date:'yyyy-MM-dd HH:mm' }}  </td>
+             </tr>
+           </tbody>
+         </table>
+       </div>
+     </div>
     </div>
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -75,7 +96,6 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
         <script src="scripts/services/imagelistservice.js"></script>
         <!-- endbuild -->
 </body>
