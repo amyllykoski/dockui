@@ -14,7 +14,7 @@ angular.module('dockuiApp')
   var dockerUrl = PROXY_URL + '_10.25.191.196:2375/images/json';
 
   var getImageList = function() {
-      $log.debug("Making AJAX request to", dockerUrl);
+      $log.debug('Making AJAX request to', dockerUrl);
       return $http.get(dockerUrl);
   };
 
