@@ -10,11 +10,31 @@ body {
   background-color: lightblue;
 }
 
+container {
+  display: inline;
+  float: left;
+}
+
+h1 {
+  text-align: center;
+  font-family: fantasy;
+}
+
 /* Table and column styling for the main view.*/
-table, th , td  {
+th {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  font-size:16pt;
+  padding: 5px;
+  color: darkblue;
+}
+
+table, td  {
   border: 1px solid grey;
   border-collapse: collapse;
   padding: 5px;
+  color: blue;
+  font-family: monospace;
 }
 table tr:nth-child(odd)	{
   background-color: #f1f1f1;
@@ -23,7 +43,7 @@ table tr:nth-child(even) {
   background-color: #ffffff;
 }
 
-.column { text-align: center; float: left; margin: 30px; width: 33%; }
+.column { text-align: center; float: left; margin: 50px; width: 33%; }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,

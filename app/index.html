@@ -21,12 +21,17 @@
 
     <!-- Add your site or application content here -->
     <div class="container">
-      <div class="column"><h2>TeamCity</h2>
+      <h1>SW Update POC</h1>
+      <div class="column">
+        <img src="images/TC_135x48.png" alt="TeamCity" height="48" width="135">
+        <span ng-if="false">
+          <img src="images/ajax-loader.gif" alt="Loading" height="42" width="42">
+        </span>
         <div ng-controller="MainCtrl">
             <table st-table="rowCollection" class="table table-striped">
               <thead>
                 <tr>
-                  <th>Tags</th>
+                  <th>Builds</th>
                   <th>Created</th>
                 </tr>
               </thead>
@@ -40,12 +45,16 @@
           </div>
       </div>
 
-      <div class="column"><h2>Teradata SW Registry</h2>
+      <div class="column">
+        <img src="images/Teradata-Icon.jpg" alt="Teradata" height="48" width="135">
+        <span ng-if="false">
+          <img src="images/ajax-loader.gif" alt="Loading" height="42" width="42">
+        </span>
        <div ng-controller="MainCtrl">
          <table st-table="rowCollection" class="table table-striped">
          	<thead>
            	<tr>
-               <th>Tags</th>
+               <th>Images</th>
            		<th>Created</th>
            	</tr>
          	</thead>
@@ -59,12 +68,16 @@
        </div>
      </div>
 
-     <div class="column"><h2>Customer SW Registry</h2>
+     <div class="column">
+        <img src="images/customer.jpg" alt="Customer" height="48" width="135">
+        <span ng-if="false">
+          <img src="images/ajax-loader.gif" alt="Loading" height="32" width="32">
+        </span>
        <div ng-controller="MainCtrl">
          <table st-table="rowCollection" class="table table-striped">
            <thead>
              <tr>
-               <th>Tags</th>
+               <th>Images</th>
                <th>Created</th>
              </tr>
            </thead>
