@@ -43,7 +43,7 @@ table tr:nth-child(even) {
   background-color: #ffffff;
 }
 
-.column { text-align: center; float: left; margin: 50px; width: 33%; }
+/*.column { text-align: center; float: left; margin: 50px; width: 33%; }*/
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
