@@ -10,16 +10,29 @@
 angular.module('dockuiApp')
   .controller('MainCtrl', function ($scope, $log, $interval, ImageListService) {
 
-    $scope.images = [];
+    $scope.builds = [];
+    $scope.teradataImages = [];
+    $scope.customerImages = [];
     $scope.isTeamCityBusy = true;
     $scope.isTeradataBusy = false;
     $scope.isCustomerBusy = true;
 
     $log.debug('Getting images...');
-    $scope.images = ImageListService.getImageList()
+    ImageListService.getTeradataImageList()
     .success(function(images){
       $log.debug('Got images', images);
-      $scope.images = images;
+      $scope.teradataImages = images;
+      $scope.builds = images;
+    })
+    .error(function(error) {
+        $log.error('GetImages failed', error);
+      $scope.status = 'Unable to get image list: ' + error.message;
+    });
+
+    ImageListService.getCustomerImageList()
+    .success(function(images){
+      $log.debug('Got images', images);
+      $scope.customerImages = images;
     })
     .error(function(error) {
         $log.error('GetImages failed', error);

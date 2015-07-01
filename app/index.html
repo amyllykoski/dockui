@@ -36,7 +36,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="row in images">
+                <tr ng-repeat="row in builds">
                   <td>{{row.RepoTags}}</td>
                   <td>{{row.Created * 1000 |  date:'yyyy-MM-dd HH:mm' }}  </td>
                 </tr>
@@ -61,7 +61,7 @@
            	</tr>
          	</thead>
          	<tbody>
-           	<tr ng-repeat="row in images">
+           	<tr ng-repeat="row in teradataImages">
                <td>{{row.RepoTags}}</td>
            		<td>{{row.Created * 1000 |  date:'yyyy-MM-dd HH:mm' }}  </td>
            	</tr>
@@ -86,7 +86,7 @@
              </tr>
            </thead>
            <tbody>
-             <tr ng-repeat="row in images">
+             <tr ng-repeat="row in customerImages">
                <td>{{row.RepoTags}}</td>
                <td>{{row.Created * 1000 |  date:'yyyy-MM-dd HH:mm' }}  </td>
              </tr>
