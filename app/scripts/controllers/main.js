@@ -14,30 +14,36 @@ angular.module('dockuiApp')
     $scope.teradataImages = [];
     $scope.customerImages = [];
     $scope.isTeamCityBusy = true;
-    $scope.isTeradataBusy = false;
+    $scope.isTeradataBusy = true;
     $scope.isCustomerBusy = true;
+    $scope.teradataHostIP = ImageListService.getTeradataIP();
+    $scope.customerHostIP = ImageListService.getCustomerIP();
 
     $log.debug('Getting images...');
-    ImageListService.getTeradataImageList()
-    .success(function(images){
-      $log.debug('Got images', images);
-      $scope.teradataImages = images;
-      $scope.builds = images;
-    })
-    .error(function(error) {
-        $log.error('GetImages failed', error);
-      $scope.status = 'Unable to get image list: ' + error.message;
-    });
+    var getTeradataData = function() {
+      ImageListService.getTeradataImageList()
+      .success(function(images){
+        $log.debug('Got images', images);
+        $scope.teradataImages = images;
+        $scope.builds = images;
+      })
+      .error(function(error) {
+          $log.error('GetImages failed', error);
+        $scope.status = 'Unable to get image list: ' + error.message;
+      });
+    };
 
-    ImageListService.getCustomerImageList()
-    .success(function(images){
-      $log.debug('Got images', images);
-      $scope.customerImages = images;
-    })
-    .error(function(error) {
-        $log.error('GetImages failed', error);
-      $scope.status = 'Unable to get image list: ' + error.message;
-    });
+    var getCustomerData = function() {
+      ImageListService.getCustomerImageList()
+      .success(function(images){
+        $log.debug('Got images', images);
+        $scope.customerImages = images;
+      })
+      .error(function(error) {
+          $log.error('GetImages failed', error);
+        $scope.status = 'Unable to get image list: ' + error.message;
+      });
+    };
 
     var stop;
     var tick = function() {
@@ -47,10 +53,12 @@ angular.module('dockuiApp')
 
       stop = $interval(function() {
         // TODO: Add proxy query
-        $scope.isTeamCityBusy = !$scope.isTeamCityBusy;
-        $scope.isTeradataBusy = !$scope.isTeradataBusy;
-        $scope.isCustomerBusy = !$scope.isCustomerBusy;
-      }, 5000);
+        $scope.isTeamCityBusy = Math.random() * 100 > 49;
+        $scope.isTeradataBusy = Math.random() * 100 > 49;
+        $scope.isCustomerBusy = Math.random() * 100 > 49;
+        getTeradataData();
+        getCustomerData();
+      }, 10000);
     };
 
     $scope.stopTick = function() {
