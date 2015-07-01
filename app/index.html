@@ -19,7 +19,6 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
     <div class="container">
       <h1>SW Update POC</h1>
       <div class="column">
@@ -31,14 +30,16 @@
             <table st-table="rowCollection" class="table table-striped">
               <thead>
                 <tr>
-                  <th>Builds</th>
-                  <th>Created</th>
+                  <th>Builder</th>
+                  <th>Image</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="row in builds">
-                  <td>{{row.RepoTags}}</td>
-                  <td>{{row.Created * 1000 |  date:'yyyy-MM-dd HH:mm' }}  </td>
+                <tr>
+                  <td>{{build.name}}</td>
+                  <td>{{build.image}}</td>
+                  <td>{{build.status}}</td>
                 </tr>
               </tbody>
             </table>
@@ -114,6 +115,7 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/services/imagelistservice.js"></script>
+        <script src="scripts/services/buildmessageservice.js"></script>
         <!-- endbuild -->
 </body>
 </html>

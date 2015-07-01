@@ -8,9 +8,10 @@
  * Controller of the dockuiApp
  */
 angular.module('dockuiApp')
-  .controller('MainCtrl', function ($scope, $log, $interval, ImageListService) {
+  .controller('MainCtrl', function ($scope, $log, $interval, ImageListService,
+    BuildMessageService) {
 
-    $scope.builds = [];
+    $scope.build = {'name':'', 'image':'', 'status':'-'};
     $scope.teradataImages = [];
     $scope.customerImages = [];
     $scope.isTeamCityBusy = true;
@@ -19,13 +20,24 @@ angular.module('dockuiApp')
     $scope.teradataHostIP = ImageListService.getTeradataIP();
     $scope.customerHostIP = ImageListService.getCustomerIP();
 
-    $log.debug('Getting images...');
+    var getBuildMessage = function() {
+      BuildMessageService.getBuildMessage()
+      .success(function(message){
+        BuildMessageService.setLatestBuildMessage(message);
+        $log.debug('Got build message', message);
+        $scope.build = message;
+      })
+      .error(function(error) {
+          $log.error('GetImages failed', error);
+        $scope.status = 'Unable to get image list: ' + error.message;
+      });
+    };
+
     var getTeradataData = function() {
       ImageListService.getTeradataImageList()
       .success(function(images){
         $log.debug('Got images', images);
         $scope.teradataImages = images;
-        $scope.builds = images;
       })
       .error(function(error) {
           $log.error('GetImages failed', error);
@@ -52,13 +64,13 @@ angular.module('dockuiApp')
       }
 
       stop = $interval(function() {
-        // TODO: Add proxy query
-        $scope.isTeamCityBusy = Math.random() * 100 > 49;
-        $scope.isTeradataBusy = Math.random() * 100 > 49;
-        $scope.isCustomerBusy = Math.random() * 100 > 49;
+        getBuildMessage();
         getTeradataData();
         getCustomerData();
-      }, 10000);
+        $scope.isTeradataBusy = false; // Math.random() * 100 > 49;
+        $scope.isCustomerBusy = false; // Math.random() * 100 > 49;
+        $scope.isTeamCityBusy = BuildMessageService.isBusy();
+      }, 5000);
     };
 
     $scope.stopTick = function() {
