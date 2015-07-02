@@ -20,7 +20,7 @@ angular.module('dockuiApp')
     $scope.teradataHostIP = ImageListService.getTeradataIP();
     $scope.customerHostIP = ImageListService.getCustomerIP();
 
-    var getBuildMessage = function() {
+    var getBuildMessages = function() {
       BuildMessageService.getBuildMessage()
       .success(function(message){
         BuildMessageService.setLatestBuildMessage(message);
@@ -64,7 +64,7 @@ angular.module('dockuiApp')
       }
 
       stop = $interval(function() {
-        getBuildMessage();
+        getBuildMessages();
         getTeradataData();
         getCustomerData();
         $scope.isTeradataBusy = false; // Math.random() * 100 > 49;

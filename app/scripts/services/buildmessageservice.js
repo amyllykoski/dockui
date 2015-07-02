@@ -12,7 +12,7 @@ angular.module('dockuiApp')
     var PROXY_URL = 'http://localhost:8007';
     var latestBuildMessage = [];
 
-    var getBuildMessage = function() {
+    var getBuildMessages = function() {
       return $http.get(PROXY_URL + '/build');
     };
 
