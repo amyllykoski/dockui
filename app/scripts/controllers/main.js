@@ -11,7 +11,7 @@ angular.module('dockuiApp')
   .controller('MainCtrl', function ($scope, $log, $interval, ImageListService,
     BuildMessageService) {
 
-    $scope.build = {'name':'', 'image':'', 'status':'-'};
+    $scope.builds = [];
     $scope.teradataImages = [];
     $scope.customerImages = [];
     $scope.isTeamCityBusy = true;
@@ -25,7 +25,7 @@ angular.module('dockuiApp')
       .success(function(message){
         BuildMessageService.setLatestBuildMessage(message);
         $log.debug('Got build message', message);
-        $scope.build = message;
+        $scope.builds = message;
       })
       .error(function(error) {
           $log.error('GetImages failed', error);
