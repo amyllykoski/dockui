@@ -8,11 +8,12 @@
  * Service in the dockuiApp.
  */
 angular.module('dockuiApp')
-  .service('BuildMessageService', function ($http) {
-    var PROXY_URL = 'http://localhost:8007';
+  .service('BuildMessageService', function ($http, $location, $log) {
+    var PROXY_URL = 'http://' + $location.host() + ':8007';
     var latestBuildMessage = [];
 
     var getBuildMessages = function() {
+      $log.debug('Getting build messages from ' + PROXY_URL + '/build');
       return $http.get(PROXY_URL + '/build');
     };
 
