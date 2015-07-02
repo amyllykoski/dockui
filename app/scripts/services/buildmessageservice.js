@@ -8,7 +8,7 @@
  * Service in the dockuiApp.
  */
 angular.module('dockuiApp')
-  .service('BuildMessageService', function ($http, $log) {
+  .service('BuildMessageService', function ($http) {
     var PROXY_URL = 'http://localhost:8007';
     var latestBuildMessage = [];
 
@@ -27,9 +27,8 @@ angular.module('dockuiApp')
       }
 
       for(var i in latestBuildMessage) {
-        $log.debug("LatestBuildMessage: ", i);
-        if( latestBuildMessage[i].status != 'done' &&
-          latestBuildMessage[i].status != '-' ) {
+        if( latestBuildMessage[i].status !== 'done' &&
+          latestBuildMessage[i].status !== '-' ) {
             return true;
           }
       }
@@ -37,7 +36,7 @@ angular.module('dockuiApp')
     };
 
     return {
-        getBuildMessage : getBuildMessage,
+        getBuildMessages : getBuildMessages,
         setLatestBuildMessage : setLatestBuildMessage,
         isBusy : isBusy
     };

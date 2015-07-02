@@ -14,7 +14,7 @@ angular.module('dockuiApp')
   var dockerUrl = PROXY_URL + '_10.25.191.196:2375/images/json';
   var centosDocker = PROXY_URL + '_153.64.104.38:2375/images/json';
   var getTeradataImageList = function() {
-      $log.debug('Making AJAX request to', dockerUrl);
+      $log.debug('Making AJAX request to', centosDocker);
       return $http.get(centosDocker);
   };
 

@@ -21,7 +21,7 @@ angular.module('dockuiApp')
     $scope.customerHostIP = ImageListService.getCustomerIP();
 
     var getBuildMessages = function() {
-      BuildMessageService.getBuildMessage()
+      BuildMessageService.getBuildMessages()
       .success(function(message){
         BuildMessageService.setLatestBuildMessage(message);
         $log.debug('Got build message', message);
@@ -57,32 +57,51 @@ angular.module('dockuiApp')
       });
     };
 
-    var stop;
+    var stopUpdates,
+        stopSpinnerUpdates;
     var tick = function() {
-      if (angular.isDefined(stop) ) {
+      if (angular.isDefined(stopUpdates) ) {
         return;
       }
 
-      stop = $interval(function() {
+      stopUpdates = $interval(function() {
         getBuildMessages();
         getTeradataData();
         getCustomerData();
+      }, 8000);
+    };
+
+    var tack = function() {
+      if (angular.isDefined(stopSpinnerUpdates) ) {
+        return;
+      }
+
+      stopSpinnerUpdates = $interval(function() {
         $scope.isTeradataBusy = false; // Math.random() * 100 > 49;
         $scope.isCustomerBusy = false; // Math.random() * 100 > 49;
         $scope.isTeamCityBusy = BuildMessageService.isBusy();
-      }, 5000);
+      }, 2000);
     };
 
     $scope.stopTick = function() {
-      if (angular.isDefined(stop)) {
-        $interval.cancel(stop);
-        stop = undefined;
+      if (angular.isDefined(stopUpdates)) {
+        $interval.cancel(stopUpdates);
+        stopUpdates = undefined;
+      }
+    };
+
+    $scope.stopTack = function() {
+      if (angular.isDefined(stopSpinnerUpdates)) {
+        $interval.cancel(stopSpinnerUpdates);
+        stopSpinnerUpdates = undefined;
       }
     };
 
     $scope.$on('$destroy', function() {
       $scope.stopTick();
+      $scope.stopTack();
     });
 
     tick();
+    tack();
   });
