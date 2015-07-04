@@ -8,27 +8,37 @@
  * Service in the dockuiApp.
  */
 angular.module('dockuiApp')
-  .factory('ImageListService', function ($http, $log) {
+  .factory('ImageListService', function ($http, $log, $rootScope, AgentConfigService) {
   //  var dockerUrl = 'http://10.25.191.196:2375/images/json';
   var PROXY_URL = 'http://localhost:8007/';
-  var dockerUrl = PROXY_URL + '_10.25.191.196:2375/images/json';
-  var centosDocker = PROXY_URL + '_153.64.104.38:2375/images/json';
+  var agentConfig = null;
+
+  AgentConfigService.getAgentConfig()
+    .success(function(config) {
+      $log.debug('Agent Config:', config);
+      agentConfig = config;
+      $rootScope.$broadcast('agentListUpdated');
+    })
+    .error(function(err) {
+      $log.error(err);
+    });
+
   var getTeradataImageList = function() {
-      $log.debug('Making AJAX request to', centosDocker);
-      return $http.get(centosDocker);
+    $log.debug('Making AJAX request to', PROXY_URL + '_' + agentConfig[1].ipAddress + ':' + agentConfig[1].port + '/images/json');
+    return $http.get(PROXY_URL + '_' + agentConfig[1].ipAddress + ':' + agentConfig[1].port + '/images/json');
   };
 
   var getCustomerImageList = function() {
-      $log.debug('Making AJAX request to', dockerUrl);
-      return $http.get(dockerUrl);
+      $log.debug('Making AJAX request to', PROXY_URL + '_' + agentConfig[0].ipAddress + ':' + agentConfig[0].port + '/images/json');
+      return $http.get(PROXY_URL + '_' + agentConfig[0].ipAddress + ':' + agentConfig[0].port + '/images/json');
   };
 
   var getTeradataIP = function() {
-    return '10.25.191.196';
+    return agentConfig[1].ipAddress;
   };
 
   var getCustomerIP = function() {
-    return '153.64.10.38';
+    return agentConfig[0].ipAddress;
   };
 
   return {

@@ -17,8 +17,12 @@ angular.module('dockuiApp')
     $scope.isTeamCityBusy = true;
     $scope.isTeradataBusy = true;
     $scope.isCustomerBusy = true;
-    $scope.teradataHostIP = ImageListService.getTeradataIP();
-    $scope.customerHostIP = ImageListService.getCustomerIP();
+    
+    $scope.$on('agentListUpdated', function(event, args) {
+      tick();
+      $scope.teradataHostIP = ImageListService.getTeradataIP();
+      $scope.customerHostIP = ImageListService.getCustomerIP();
+    });
 
     var getBuildMessages = function() {
       BuildMessageService.getBuildMessages()
@@ -102,6 +106,5 @@ angular.module('dockuiApp')
       $scope.stopTack();
     });
 
-    tick();
     tack();
   });
