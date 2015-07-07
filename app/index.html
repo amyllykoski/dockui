@@ -48,7 +48,7 @@
 
       <br/><br/>
 
-      <div class="column">
+      <!-- <div class="column">
        <div ng-model="isTeradataBusy">
          <img src="images/Teradata-Icon.jpg" alt="Teradata" height="48" width="135">
          <span ng-if="isTeradataBusy">
@@ -69,7 +69,30 @@
          	</tbody>
          </table>
        </div>
-     </div>
+     </div> -->
+
+     <br/><br/>
+
+     <div class="column">
+      <div ng-model="isTeradataBusy">
+        <img src="images/Teradata-Icon.jpg" alt="Teradata" height="48" width="135">
+        <span ng-if="isTeradataBusy">
+          <img src="images/ajax-loader.gif" alt="Loading" height="42" width="42">
+        </span>
+        <table st-table="rowCollection" class="table table-striped">
+          <thead>
+            <tr>
+              <th>Registry Images  ({{teradataHostIP}})</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in teradataRegistry">
+              <td ng-if="row.status=='done'">{{row.image}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
      <br/><br/>
 

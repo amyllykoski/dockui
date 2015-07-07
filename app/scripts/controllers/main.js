@@ -14,6 +14,7 @@ angular.module('dockuiApp')
     $scope.builds = [];
     $scope.teradataImages = [];
     $scope.customerImages = [];
+    $scope.teradataRegistry = {};
     $scope.isTeamCityBusy = true;
     $scope.isTeradataBusy = true;
     $scope.isCustomerBusy = true;
@@ -30,6 +31,18 @@ angular.module('dockuiApp')
       .error(function(error) {
           $log.error('GetImages failed', error);
         $scope.status = 'Unable to get image list: ' + error.message;
+      });
+    };
+
+    var getTeradataRegistryData = function () {
+      ImageListService.getTeradataRegistryList()
+      .success(function(images){
+        $log.debug('Got registry images', images);
+        $scope.teradataRegistry = images;
+      })
+      .error(function(error) {
+          $log.error('GetImages failed', error);
+        $scope.status = 'Unable to get registry image list: ' + error.message;
       });
     };
 
@@ -68,6 +81,7 @@ angular.module('dockuiApp')
         getBuildMessages();
         getTeradataData();
         getCustomerData();
+        getTeradataRegistryData();
       }, 8000);
     };
 
