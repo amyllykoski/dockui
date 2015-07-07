@@ -17,7 +17,7 @@ angular.module('dockuiApp')
     $scope.isTeamCityBusy = true;
     $scope.isTeradataBusy = true;
     $scope.isCustomerBusy = true;
-    
+
     $scope.$on('agentListUpdated', function(event, args) {
       tick();
       $scope.teradataHostIP = ImageListService.getTeradataIP();
